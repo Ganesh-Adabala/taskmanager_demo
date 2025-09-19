@@ -1,0 +1,113 @@
+### Register a new user
+POST https://localhost:7299/api/users/register
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "firstName": "John",
+  "lastName": "Doe"
+}
+
+### Login with valid credentials
+POST https://localhost:7299/api/users/login
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "password": "password123"
+}
+
+### Login with invalid credentials
+POST https://localhost:7299/api/users/login
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "password": "wrongpassword"
+}
+
+### Login with non-existent user
+POST https://localhost:7299/api/users/login
+Content-Type: application/json
+
+{
+  "username": "nonexistent",
+  "password": "password123"
+}
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "firstName": "John",
+  "lastName": "Doe"
+}
+
+### Register another user
+POST https://localhost:7299/api/users/register
+Content-Type: application/json
+
+{
+  "username": "janedoe",
+  "email": "jane.doe@example.com", 
+  "password": "securepass456",
+  "firstName": "Jane",
+  "lastName": "Doe"
+}
+
+### Test duplicate username
+POST https://localhost:7299/api/users/register
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "another.john@example.com",
+  "password": "anotherpass789",
+  "firstName": "Another",
+  "lastName": "John"
+}
+
+### Test duplicate email
+POST https://localhost:7299/api/users/register
+Content-Type: application/json
+
+{
+  "username": "uniqueuser",
+  "email": "john.doe@example.com",
+  "password": "uniquepass123",
+  "firstName": "Unique",
+  "lastName": "User"
+}
+
+### Test validation - invalid email
+POST https://localhost:7299/api/users/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "invalid-email",
+  "password": "password123",
+  "firstName": "Test",
+  "lastName": "User"
+}
+
+### Test validation - short password
+POST https://localhost:7299/api/users/register
+Content-Type: application/json
+
+{
+  "username": "testuser2",
+  "email": "test2@example.com",
+  "password": "123",
+  "firstName": "Test",
+  "lastName": "User"
+}
+
+### Get all users
+GET https://localhost:7299/api/users
+
+### Get specific user
+GET https://localhost:7299/api/users/1
