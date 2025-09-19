@@ -1,0 +1,248 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 20px;
+}
+
+.login-form {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #e1e5e9;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .login-form {
+    animation: none;
+  }
+  
+  .login-button {
+    transition: none;
+  }
+  
+  .form-input {
+    transition: none;
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-input.error {
+  border-color: #dc3545;
+  background-color: #fff5f5; /* Light red background for better visibility */
+}
+
+.form-input.error:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .login-form {
+    border: 2px solid #000;
+    box-shadow: none;
+  }
+  
+  .form-input {
+    border-width: 2px;
+    border-color: #000;
+  }
+  
+  .form-input:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 2px #000;
+  }
+  
+  .form-input.error {
+    border-color: #000;
+    background-color: #ffcccc;
+  }
+  
+  .login-button {
+    border: 2px solid #000;
+  }
+  
+  .error-message {
+    background-color: #ffcccc;
+    padding: 0.25rem;
+    border: 1px solid #000;
+  }
+}
+
+/* Color blind friendly error indicators */
+.form-input.error::before {
+  content: "⚠️";
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+}
+
+.form-input:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.error-message {
+  display: block;
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-top: 0.5rem;
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.login-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-button.loading {
+  background-color: #6c757d;
+  cursor: wait;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .login-form-container {
+    padding: 10px;
+  }
+  
+  .login-form {
+    padding: 1.5rem;
+  }
+  
+  .login-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* Animation for form appearance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Color blind friendly error indicators */
+.form-group.has-error::before {
+  content: "⚠️";
+  position: absolute;
+  right: 0.5rem;
+  top: 2.25rem;
+  font-size: 1rem;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Focus management for better keyboard navigation */
+.login-form:focus-within {
+  box-shadow: 0 0 0 2px #007bff;
+}
+
+/* Additional visual cues for form validation */
+.form-input:valid:not(:placeholder-shown) {
+  border-color: #28a745;
+  background-color: #f8fff9;
+}
+
+.form-input:valid:not(:placeholder-shown)::after {
+  content: "✓";
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #28a745;
+  font-weight: bold;
+}

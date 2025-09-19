@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Task Manager Demo - Organize your tasks and boost productivity" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Accessibility and SEO improvements -->
+    <meta name="keywords" content="task manager, productivity, todo, organization" />
+    <meta name="author" content="Task Manager Demo" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Responsive design and accessibility -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    
+    <title>Task Manager Demo</title>
+    
+    <!-- Critical CSS for loading performance -->
+    <style>
+      /* Loading spinner */
+      .loading-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #e3e3e3;
+        border-top: 4px solid #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      .loading-text {
+        margin-top: 20px;
+        color: #666;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        font-size: 16px;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Hide loading when React loads */
+      .loading-container.loaded {
+        display: none;
+      }
+      
+      /* Reset and base styles */
+      * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+      }
+      
+      /* Accessibility: Respect user's motion preferences */
+      @media (prefers-reduced-motion: reduce) {
+        .loading-spinner {
+          animation: none;
+        }
+      }
+      
+      /* High contrast support */
+      @media (prefers-contrast: high) {
+        body {
+          background-color: #ffffff;
+          color: #000000;
+        }
+        
+        .loading-spinner {
+          border-color: #000000;
+          border-top-color: #0000ff;
+        }
+      }
+      
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #1a1a1a;
+          color: #e0e0e0;
+        }
+        
+        .loading-container {
+          background-color: #1a1a1a;
+        }
+        
+        .loading-text {
+          color: #a0a0a0;
+        }
+        
+        .loading-spinner {
+          border-color: #444;
+          border-top-color: #4a9eff;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div style="text-align: center; padding: 40px; font-family: Arial, sans-serif;">
+        <h1>JavaScript Required</h1>
+        <p>You need to enable JavaScript to run this Task Manager application.</p>
+        <p>Please enable JavaScript in your browser settings and refresh the page.</p>
+      </div>
+    </noscript>
+    
+    <!-- Loading indicator while React loads -->
+    <div id="loading" class="loading-container" role="status" aria-label="Loading application">
+      <div class="loading-spinner" aria-hidden="true"></div>
+      <div class="loading-text">Loading Task Manager...</div>
+    </div>
+    
+    <!-- React app will be mounted here -->
+    <div id="root" role="main" aria-label="Task Manager Application"></div>
+    
+    <!-- Script to hide loading indicator when React loads -->
+    <script>
+      // Hide loading spinner when React starts
+      document.addEventListener('DOMContentLoaded', function() {
+        const root = document.getElementById('root');
+        const loading = document.getElementById('loading');
+        
+        // Check if React has loaded content
+        const checkReactLoaded = () => {
+          if (root && root.children.length > 0) {
+            loading.classList.add('loaded');
+            clearInterval(checkInterval);
+          }
+        };
+        
+        // Check every 100ms for React content
+        const checkInterval = setInterval(checkReactLoaded, 100);
+        
+        // Fallback: hide loading after 10 seconds
+        setTimeout(() => {
+          loading.classList.add('loaded');
+          clearInterval(checkInterval);
+        }, 10000);
+      });
+      
+      // Performance monitoring
+      if ('performance' in window) {
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            const perf = performance.getEntriesByType('navigation')[0];
+            console.log('Page load time:', perf.loadEventEnd - perf.loadEventStart, 'ms');
+          }, 0);
+        });
+      }
+    </script>
+  </body>
+</html>
