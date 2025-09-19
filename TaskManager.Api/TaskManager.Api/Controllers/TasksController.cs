@@ -12,7 +12,4 @@ namespace TaskManager.Api.Controllers
             return Ok(new[] { new { Id = 1, Title = "Demo Task" } });
         }
     }
-
-
-    
 }
